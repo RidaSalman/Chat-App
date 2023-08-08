@@ -60,4 +60,8 @@ dependencies {
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.7")
     implementation ("androidx.lifecycle:lifecycle-extensions:2.2.0")
     implementation ("androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1")
+
+    //Circular Image Library
+    implementation ("com.github.dhaval2404:imagepicker:2.1")
+    implementation ("de.hdodenhof:circleimageview:3.1.0")
 }
