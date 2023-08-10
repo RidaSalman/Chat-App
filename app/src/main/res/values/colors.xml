@@ -10,5 +10,7 @@
     <color name="steelGray">#6C798F</color>
     <color name="frostWhite">#F1F5F6</color>
 
+    <color name="red">#FF0000</color>
+
 
 </resources>

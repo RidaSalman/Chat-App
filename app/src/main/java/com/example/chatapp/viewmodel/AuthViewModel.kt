@@ -1,32 +1,31 @@
-package com.example.chatapp.viewmodel
+package com.example.chatapp.auth
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.MutableLiveData
-import com.example.chatapp.repository.AuthenticationRepository
-import com.google.firebase.auth.FirebaseUser
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.chatapp.repository.AuthRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
+class AuthViewModel : ViewModel() {
 
-class AuthViewModel(application: Application) : AndroidViewModel(application) {
-    private val repository: AuthenticationRepository
-    val userData: MutableLiveData<FirebaseUser>
-    val loggedStatus: MutableLiveData<Boolean>
+    private val authRepository = AuthRepository()
 
-    init {
-        repository = AuthenticationRepository(application)
-        userData = repository.getFirebaseUserMutableLiveData
-        loggedStatus = repository.getUserLoggedMutableLiveData
+    fun signup(email: String, password: String, callback: (Boolean) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val success = authRepository.signup(email, password)
+            withContext(Dispatchers.Main) {
+                callback(success)
+            }
+        }
     }
 
-    fun register(email: String?, password: String?, confirmpassword: String?) {
-        repository.register(email!!, password!!, confirmpassword!!)
-    }
-
-    fun signIn(email: String?, pass: String?) {
-        repository.login(email!!, pass!!)
-    }
-
-    fun signOut() {
-        repository.signOut()
+    fun login(email: String, password: String, callback: (Boolean) -> Unit) {
+        viewModelScope.launch(Dispatchers.IO) {
+            val success = authRepository.login(email, password)
+            withContext(Dispatchers.Main) {
+                callback(success)
+            }
+        }
     }
 }
