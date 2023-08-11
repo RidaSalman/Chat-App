@@ -11,6 +11,12 @@
     <color name="frostWhite">#F1F5F6</color>
 
     <color name="red">#FF0000</color>
+    <color name="opacity">#14FFFFFF</color>
+    <color name="Search">#B6B6B6</color>
+    <color name="Active">#00FF00</color>
+    <color name="Text">#F0F0F0</color>
+    <color name="data">#888888</color>
+    <color name="separator">#221E40</color>
 
 
 </resources>

@@ -14,8 +14,8 @@
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
         <action
-            android:id="@+id/action_loginFragment_to_blankFragment"
-            app:destination="@id/blankFragment" />
+            android:id="@+id/action_loginFragment_to_channelFragment"
+            app:destination="@id/channelFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -36,8 +36,8 @@
             app:destination="@id/loginFragment" />
     </fragment>
     <fragment
-        android:id="@+id/blankFragment"
-        android:name="com.example.chatapp.MainHomeChat"
-        android:label="fragment_blank"
-        tools:layout="@layout/fragment_blank" />
+        android:id="@+id/channelFragment"
+        android:name="com.example.chatapp.ChannelFragment"
+        android:label="fragment_channel"
+        tools:layout="@layout/fragment_channel" />
 </navigation>

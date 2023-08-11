@@ -56,7 +56,7 @@ class LoginFragment : Fragment() {
 
         viewModel.login(email, password) { success ->
             if (success) {
-                navController.navigate(R.id.action_loginFragment_to_blankFragment)
+                navController.navigate(R.id.action_loginFragment_to_channelFragment)
                 Toast.makeText(
                     requireContext(),
                     "Login Successful",
