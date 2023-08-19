@@ -39,5 +39,17 @@
         android:id="@+id/channelFragment"
         android:name="com.example.chatapp.ChannelFragment"
         android:label="fragment_channel"
-        tools:layout="@layout/fragment_channel" />
+        tools:layout="@layout/fragment_channel" >
+        <action
+            android:id="@+id/action_channelFragment_to_createNewGroupFragment"
+            app:destination="@id/createNewGroupFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/createNewGroupFragment"
+        android:name="com.example.chatapp.CreateNewGroupFragment"
+        android:label="CreateNewGroupFragment" >
+        <action
+            android:id="@+id/action_createNewGroupFragment_to_channelFragment"
+            app:destination="@id/channelFragment" />
+    </fragment>
 </navigation>

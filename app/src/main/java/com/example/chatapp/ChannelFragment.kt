@@ -9,12 +9,18 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.chatapp.Adapter.ChatAdapter
 import com.example.chatapp.databinding.FragmentChannelBinding
 
 
 class ChannelFragment : Fragment() {
 
     private lateinit var binding: FragmentChannelBinding
+    private lateinit var navController: NavController
+    private lateinit var adapter: ChatAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -27,7 +33,14 @@ class ChannelFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+        adapter = ChatAdapter()
+        navController = findNavController()
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_channel, container, false)
+        binding.chatshowRecycler.layoutManager = LinearLayoutManager(requireContext())
+        binding.chatshowRecycler.adapter = adapter
+        binding.floatingActionButton.setOnClickListener{
+            navController.navigate(R.id.action_channelFragment_to_createNewGroupFragment);
+        }
 
         /*val s = binding.searchView
 

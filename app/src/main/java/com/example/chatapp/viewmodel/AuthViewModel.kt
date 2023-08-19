@@ -11,14 +11,15 @@ class AuthViewModel : ViewModel() {
 
     private val authRepository = AuthRepository()
 
-    fun signup(email: String, password: String, callback: (Boolean) -> Unit) {
+    fun signup(username: String, email: String, password: String, confirmPassword: String, callback: (Boolean) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {
-            val success = authRepository.signup(email, password)
+            val success = authRepository.signup(username,email, password)
             withContext(Dispatchers.Main) {
                 callback(success)
             }
         }
     }
+
 
     fun login(email: String, password: String, callback: (Boolean) -> Unit) {
         viewModelScope.launch(Dispatchers.IO) {

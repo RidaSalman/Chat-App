@@ -4,6 +4,8 @@ import android.app.Activity
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import com.google.firebase.firestore.DocumentReference
+import com.google.firebase.firestore.FirebaseFirestore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,8 +21,10 @@ import com.example.chatapp.auth.AuthViewModel
 import com.example.chatapp.databinding.FragmentSignupBinding
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import org.checkerframework.checker.nullness.qual.NonNull
 
 
 class SignupFragment : Fragment() {
@@ -80,7 +84,7 @@ class SignupFragment : Fragment() {
             return
         }
 
-        viewModel.signup(email, password) { success ->
+        viewModel.signup(username,email, password,confirmPassword) { success ->
             if (success) {
                 requireActivity().runOnUiThread {
                     Toast.makeText(
