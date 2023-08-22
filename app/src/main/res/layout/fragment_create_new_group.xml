@@ -51,7 +51,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/floatingActionButton2"
+            android:id="@+id/floatingActionButton0"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="104dp"
@@ -66,7 +66,7 @@
 
 
         <android.widget.Button
-            android:id="@+id/buttonsignup"
+            android:id="@+id/buttoncreategroup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
@@ -80,7 +80,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/username_signup" />
+            app:layout_constraintTop_toBottomOf="@+id/groupname" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -93,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/buttonsignup">
+            app:layout_constraintTop_toBottomOf="@+id/buttoncreategroup">
 
 
             <TextView
@@ -119,7 +119,7 @@
         </LinearLayout>
 
         <EditText
-            android:id="@+id/username_signup"
+            android:id="@+id/groupname"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:layout_marginTop="32dp"

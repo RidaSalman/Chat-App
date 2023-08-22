@@ -79,4 +79,8 @@ dependencies {
     implementation ("androidx.activity:activity:1.7.2")
     implementation ("androidx.lifecycle:lifecycle-runtime:2.6.1")
     implementation ("androidx.activity:activity-ktx:1.7.2")
+
+    //
+    implementation ("com.squareup.picasso:picasso:2.71828")
+
 }
