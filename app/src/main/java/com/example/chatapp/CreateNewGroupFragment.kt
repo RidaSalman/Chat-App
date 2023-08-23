@@ -11,13 +11,14 @@ import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.chatapp.Channel.GroupData
+
 import com.example.chatapp.databinding.FragmentCreateNewGroupBinding
 import com.example.chatapp.databinding.FragmentLoginBinding
-import com.example.chatapp.viewmodel.CreateGroupViewModel
+import com.example.chatapp.viewmodel.CreateNewGroupViewModel
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.database.FirebaseDatabase
 
@@ -26,17 +27,17 @@ class CreateNewGroupFragment : Fragment() {
     private lateinit var binding: FragmentCreateNewGroupBinding
     private lateinit var navController: NavController
     private var mProfileUri: Uri? = null
-    private val viewModel: CreateGroupViewModel by viewModels()
+    private lateinit var viewModel: CreateNewGroupViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        // Initialize your ViewModel
+        viewModel = ViewModelProvider(this).get(CreateNewGroupViewModel::class.java)
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_new_group, container, false)
         navController = findNavController()
-        binding.backArrow.setOnClickListener{
-            navController.navigate(R.id.action_createNewGroupFragment_to_channelFragment)
-        }
+
         binding.floatingActionButton0.setOnClickListener {
             ImagePicker.with(this)
                 .crop() //Crop image(Optional), Check Customization for more option
@@ -49,12 +50,18 @@ class CreateNewGroupFragment : Fragment() {
                     startForProfileImageResult.launch(intent)
                 }
         }
-        binding.buttoncreategroup.setOnClickListener {
-            saveToDatabase()
-            navController.navigate(R.id.action_createNewGroupFragment_to_channelFragment);
+        binding.buttoncreategroup.setOnClickListener{
+            val groupName = binding.groupname.text.toString()
+            if (groupName.isNotEmpty() && mProfileUri != null) {
+                viewModel.createNewGroup(groupName, mProfileUri!!)
+            } else {
+                Toast.makeText(requireContext(), "Please provide group name and image", Toast.LENGTH_SHORT).show()
+            }
+            navController.navigate(R.id.action_createNewGroupFragment_to_channelFragment)
         }
-
-
+        binding.backArrow.setOnClickListener{
+            navController.navigate(R.id.action_createNewGroupFragment_to_channelFragment)
+        }
 
         return binding.root
     }
@@ -69,7 +76,7 @@ class CreateNewGroupFragment : Fragment() {
                 val fileUri = data?.data!!
 
                 mProfileUri = fileUri
-                binding.profileImage.setImageURI(fileUri)
+                binding.groupImage.setImageURI(fileUri)
             } else if (resultCode == ImagePicker.RESULT_ERROR) {
                 Toast.makeText(requireContext(), ImagePicker.getError(data), Toast.LENGTH_SHORT).show()
             } else {
@@ -77,33 +84,5 @@ class CreateNewGroupFragment : Fragment() {
             }
         }
 
-    private fun saveToDatabase() {
-        val groupName = binding.groupname.text.toString().trim()
 
-        if (groupName.isNotEmpty() && mProfileUri != null) {
-            val groupData = GroupData(groupName = groupName, groupImageUrl = mProfileUri.toString())
-
-            viewModel.saveGroup(groupData) { isSuccess ->
-                if (isSuccess) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Group created and data saved.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Failed to save data to the database.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        } else {
-            Toast.makeText(
-                requireContext(),
-                "Please select an image and enter a group name.",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
 }
