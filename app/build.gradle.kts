@@ -75,6 +75,7 @@ dependencies {
     //Circular Image Library
     implementation ("com.github.dhaval2404:imagepicker:2.1")
     implementation ("de.hdodenhof:circleimageview:3.1.0")
+    implementation ("com.makeramen:roundedimageview:2.3.0")
 
     implementation ("androidx.fragment:fragment:1.6.1")
     implementation ("androidx.activity:activity:1.7.2")

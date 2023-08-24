@@ -70,6 +70,12 @@ class ChannelFragment : Fragment() {
 
         val hintText = "<font color='#B6B6B6'>${getString(R.string.hintSearchMess)}</font>"
         s = Html.fromHtml(hintText, Html.FROM_HTML_MODE_LEGACY)*/
+        adapter.setOnItemClickListener { groupName, groupImage ->
+            val bundle = Bundle()
+            bundle.putString("groupName", groupName)
+            bundle.putString("groupImage", groupImage)
+            navController.navigate(R.id.action_channelFragment_to_groupChatFragment, bundle)
+        }
 
         return binding.root
     }

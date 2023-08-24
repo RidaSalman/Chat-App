@@ -5,26 +5,39 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="4dp">
 
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/imageprofile"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:background="@drawable/group_13462"
+        android:scaleType="centerCrop"
+        app:riv_oval="true"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/txt_receive_message"/>
+
     <TextView
-        android:id="@+id/textmessage"
+        android:id="@+id/txt_receive_message"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="4dp"
+        android:layout_marginLeft="4dp"
         android:background="@drawable/background_receive_message"
         android:padding="12dp"
         android:textColor="@color/white"
         android:textSize="13sp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@id/imageprofile"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintWidth_percent="0.75" />
-    
+
     <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         android:textColor="@color/white"
         android:textSize="10sp"
-        app:layout_constraintStart_toStartOf="@+id/textmessage"
-        app:layout_constraintTop_toBottomOf="@id/textmessage"
+        app:layout_constraintStart_toStartOf="@+id/txt_receive_message"
+        app:layout_constraintTop_toBottomOf="@id/txt_receive_message"
         />
     
     

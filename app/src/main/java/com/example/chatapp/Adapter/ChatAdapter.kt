@@ -17,7 +17,10 @@ import java.io.File
 
 class ChatAdapter(private val context: Context, private val groupList: List<GroupModel>): RecyclerView.Adapter<ChatAdapter.MyViewHolder>() {
 
-
+    private var onItemClickListener: ((String, String) -> Unit)? = null
+    fun setOnItemClickListener(listener: (String, String) -> Unit) {
+        onItemClickListener = listener
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.chat_show,parent,false)
         return MyViewHolder(view)
@@ -30,13 +33,9 @@ class ChatAdapter(private val context: Context, private val groupList: List<Grou
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         val group = groupList[position]
         holder.bind(group)
-
         holder.itemView.setOnClickListener {
-            // Navigate to the GroupChatFragment action with the bundle as argument
-            val navController = Navigation.findNavController(it)
-            navController.navigate(R.id.action_channelFragment_to_groupChatFragment)
+            onItemClickListener?.invoke(group.groupName, group.groupImageUrl)
         }
-
 
     }
     class MyViewHolder(itemView: android.view.View):RecyclerView.ViewHolder(itemView) {
