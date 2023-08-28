@@ -26,7 +26,7 @@ class CreateNewGroupFragment : Fragment() {
     private lateinit var binding: FragmentCreateNewGroupBinding
     private lateinit var navController: NavController
     private var mProfileUri: Uri? = null
-    private val viewModel: CreateGroupViewModel by viewModels()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -50,7 +50,6 @@ class CreateNewGroupFragment : Fragment() {
                 }
         }
         binding.buttoncreategroup.setOnClickListener {
-            saveToDatabase()
             navController.navigate(R.id.action_createNewGroupFragment_to_channelFragment);
         }
 
@@ -77,33 +76,4 @@ class CreateNewGroupFragment : Fragment() {
             }
         }
 
-    private fun saveToDatabase() {
-        val groupName = binding.groupname.text.toString().trim()
-
-        if (groupName.isNotEmpty() && mProfileUri != null) {
-            val groupData = GroupData(groupName = groupName, groupImageUrl = mProfileUri.toString())
-
-            viewModel.saveGroup(groupData) { isSuccess ->
-                if (isSuccess) {
-                    Toast.makeText(
-                        requireContext(),
-                        "Group created and data saved.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Failed to save data to the database.",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
-        } else {
-            Toast.makeText(
-                requireContext(),
-                "Please select an image and enter a group name.",
-                Toast.LENGTH_SHORT
-            ).show()
-        }
-    }
 }

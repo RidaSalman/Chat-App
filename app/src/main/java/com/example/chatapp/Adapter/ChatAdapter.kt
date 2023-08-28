@@ -10,7 +10,6 @@ import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chatapp.Channel.GroupData
 import com.example.chatapp.R
-import com.squareup.picasso.Picasso
 import java.io.File
 
 class ChatAdapter(private val context: Context, private val groupList: List<GroupData>): RecyclerView.Adapter<ChatAdapter.MyViewHolder>() {
@@ -32,19 +31,11 @@ class ChatAdapter(private val context: Context, private val groupList: List<Grou
     class MyViewHolder(itemView: android.view.View):RecyclerView.ViewHolder(itemView){
 
         val titleTextView: TextView = itemView.findViewById(R.id.textViewTitle1)
-        val image:ImageView = itemView.findViewById(R.id.profile_image)
 
 
-        @SuppressLint("ResourceType")
         fun bind(group: GroupData) {
             titleTextView.text = group.groupName
-            val cleanedImageUrl = group.groupImageUrl.removePrefix("file://")
 
-
-
-            Picasso.get()
-                .load(File(cleanedImageUrl))
-                .into(image)
         }
 
     }

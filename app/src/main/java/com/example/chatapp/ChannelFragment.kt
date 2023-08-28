@@ -48,9 +48,8 @@ class ChannelFragment : Fragment() {
                 groupList.clear()
                 for (dataSnapshot in snapshot.children) {
                     val groupName = dataSnapshot.child("groupName").getValue(String::class.java)
-                    val groupImage = dataSnapshot.child("groupImageUrl").getValue(String::class.java)
                     groupName?.let {
-                        val groupData = GroupData(groupName = it, groupImageUrl = groupImage?:"")
+                        val groupData = GroupData(groupName = it)
                         groupList.add(groupData)
                     }
                 }
