@@ -9,15 +9,15 @@ import com.google.firebase.storage.FirebaseStorage
 
 class GroupRepository {
     fun uploadImageAndSaveGroup(groupName: String, groupImageUri: Uri, callback: Callback) {
-        // Upload group image to Firebase Storage
+
         val storageRef = FirebaseStorage.getInstance().reference
         val imageRef = storageRef.child("group_images/${groupImageUri.lastPathSegment}")
         val uploadTask = imageRef.putFile(groupImageUri)
 
-        // Listen for upload success/failure
+
         uploadTask.addOnSuccessListener { taskSnapshot ->
             imageRef.downloadUrl.addOnSuccessListener { uri ->
-                // Save group name and image URL to Firebase Realtime Database
+
                 val databaseRef: DatabaseReference = FirebaseDatabase.getInstance().getReference("groups")
                 val group = GroupModel(groupName, uri.toString())
                 databaseRef.push().setValue(group)

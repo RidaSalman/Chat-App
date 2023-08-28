@@ -32,9 +32,9 @@ class CreateNewGroupFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Initialize your ViewModel
+
         viewModel = ViewModelProvider(this).get(CreateNewGroupViewModel::class.java)
-        // Inflate the layout for this fragment
+
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_create_new_group, container, false)
         navController = findNavController()
 
@@ -72,7 +72,7 @@ class CreateNewGroupFragment : Fragment() {
             val data = result.data
 
             if (resultCode == Activity.RESULT_OK) {
-                //Image Uri will not be null for RESULT_OK
+
                 val fileUri = data?.data!!
 
                 mProfileUri = fileUri

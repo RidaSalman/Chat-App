@@ -29,10 +29,6 @@ class GroupChatFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var messageAdapter: MessageAdapter
     private lateinit var messageList : ArrayList<Message>
-
-
-
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

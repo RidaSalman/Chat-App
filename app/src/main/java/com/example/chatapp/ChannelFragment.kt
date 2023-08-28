@@ -77,6 +77,11 @@ class ChannelFragment : Fragment() {
             navController.navigate(R.id.action_channelFragment_to_groupChatFragment, bundle)
         }
 
+        binding.profileImage.setOnClickListener{
+            navController.navigate(R.id.action_channelFragment_to_logOutFragment)
+
+        }
+
         return binding.root
     }
 

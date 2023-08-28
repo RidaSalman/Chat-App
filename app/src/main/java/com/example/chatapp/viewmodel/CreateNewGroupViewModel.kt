@@ -10,9 +10,6 @@ class CreateNewGroupViewModel : ViewModel() {
     private val groupCreationStatus = MutableLiveData<Boolean>()
     private val groupRepository = GroupRepository()
 
-    fun getGroupCreationStatus(): LiveData<Boolean> {
-        return groupCreationStatus
-    }
 
     fun createNewGroup(groupName: String, groupImageUri: Uri) {
         groupRepository.uploadImageAndSaveGroup(groupName, groupImageUri, object : GroupRepository.Callback {

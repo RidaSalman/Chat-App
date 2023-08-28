@@ -52,4 +52,13 @@ class AuthRepository {
             false // Login failed due to an exception
         }
     }
+
+    fun logout(): Boolean {
+        return try {
+            auth.signOut()
+            true // Logout successful
+        } catch (e: Exception) {
+            false // Logout failed
+        }
+    }
 }
