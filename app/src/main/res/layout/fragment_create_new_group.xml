@@ -38,7 +38,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
+            android:id="@+id/group_image"
             android:layout_width="130dp"
             android:layout_height="130dp"
             android:layout_marginTop="24dp"
@@ -58,9 +58,9 @@
             android:clickable="true"
             android:backgroundTint="@color/Color_orange"
             android:src="@drawable/group_13465"
-            app:layout_constraintBottom_toBottomOf="@+id/profile_image"
+            app:layout_constraintBottom_toBottomOf="@+id/group_image"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/profile_image"
+            app:layout_constraintTop_toTopOf="@+id/group_image"
             app:layout_constraintVertical_bias="1.0"
             app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyApp.FloatingActionButton"/>
 
@@ -133,7 +133,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_image" />
+            app:layout_constraintTop_toBottomOf="@+id/group_image" />
 
 
 

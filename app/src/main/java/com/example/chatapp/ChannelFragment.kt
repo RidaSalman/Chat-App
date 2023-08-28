@@ -1,7 +1,6 @@
 package com.example.chatapp
 
 import android.os.Bundle
-import android.text.Html
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,8 +10,9 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chatapp.Adapter.ChatAdapter
-import com.example.chatapp.Channel.GroupData
+import com.example.chatapp.Channel.GroupModel
 import com.example.chatapp.databinding.FragmentChannelBinding
+import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.DatabaseReference
@@ -25,7 +25,7 @@ class ChannelFragment : Fragment() {
     private lateinit var navController: NavController
     private lateinit var adapter: ChatAdapter
     private lateinit var database: DatabaseReference
-    private var groupList = ArrayList<GroupData>()
+    private var groupList = ArrayList<GroupModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,12 +34,13 @@ class ChannelFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_channel, container, false)
         navController = findNavController()
 
-        adapter = ChatAdapter(requireContext(), groupList)
+        adapter =  ChatAdapter(requireContext(), groupList)
         binding.chatshowRecycler.layoutManager = LinearLayoutManager(requireContext())
         binding.chatshowRecycler.adapter = adapter
 
         database = FirebaseDatabase.getInstance().getReference("groups")
-        binding.floatingActionButton.setOnClickListener {
+
+        binding.floatingActionButton.setOnClickListener{
             navController.navigate(R.id.action_channelFragment_to_createNewGroupFragment)
         }
 
@@ -48,8 +49,9 @@ class ChannelFragment : Fragment() {
                 groupList.clear()
                 for (dataSnapshot in snapshot.children) {
                     val groupName = dataSnapshot.child("groupName").getValue(String::class.java)
+                    val groupImage = dataSnapshot.child("groupImageUrl").getValue(String::class.java)
                     groupName?.let {
-                        val groupData = GroupData(groupName = it)
+                        val groupData = GroupModel(groupName = it, groupImageUrl = groupImage?:"")
                         groupList.add(groupData)
                     }
                 }
@@ -61,10 +63,19 @@ class ChannelFragment : Fragment() {
             }
         })
 
+
+
+
         /*val s = binding.searchView
 
         val hintText = "<font color='#B6B6B6'>${getString(R.string.hintSearchMess)}</font>"
         s = Html.fromHtml(hintText, Html.FROM_HTML_MODE_LEGACY)*/
+        adapter.setOnItemClickListener { groupName, groupImage ->
+            val bundle = Bundle()
+            bundle.putString("groupName", groupName)
+            bundle.putString("groupImage", groupImage)
+            navController.navigate(R.id.action_channelFragment_to_groupChatFragment, bundle)
+        }
 
         return binding.root
     }

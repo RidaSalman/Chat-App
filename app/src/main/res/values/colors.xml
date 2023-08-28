@@ -18,5 +18,10 @@
     <color name="data">#888888</color>
     <color name="separator">#221E40</color>
 
+    <color name="sent">#1E1940</color>
+    <color name="receive">#1F1C32</color>
+
+
+
 
 </resources>
